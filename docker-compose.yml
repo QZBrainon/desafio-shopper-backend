@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    hostname: postgres
+    image: postgres:15 
+    container_name: postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    container_name: api
+    environment:
+      DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/mydb"
+    env_file:
+      - .env
+    ports:
+      - "80:3000"
+    depends_on:
+      - postgres
