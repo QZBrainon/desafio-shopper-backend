@@ -16,6 +16,8 @@ RUN npm install
 # Copy the source code.
 COPY . .
 
+RUN npx prisma generate
+
 # Build the TypeScript code.
 RUN npm run build
 
