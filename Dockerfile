@@ -10,11 +10,11 @@ EXPOSE 3000
 # Copy application dependency manifests.
 COPY package*.json ./
 
-# Copy the source code.
-COPY . .
-
 # Install production dependencies.
 RUN npm install
+
+# Copy the source code.
+COPY . .
 
 # Build the TypeScript code.
 RUN npm run build
